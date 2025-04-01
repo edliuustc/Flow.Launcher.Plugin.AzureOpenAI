@@ -1,0 +1,12 @@
+{
+  "ID": "12345678-1234-1234-1234-1234567890ab",
+  "ActionKeyword": "PluginActionKeyword",
+  "Name": "AzureOpenAI",
+  "Description": "PluginDescription",
+  "Version": "1.0.0",
+  "Author": "YourName",
+  "Language": "csharp",
+  "IcoPath": "icon.png",
+  "Website": "https://github.com/YourUsername/Flow.Launcher.Plugin.AzureOpenAI",
+  "ExecuteFileName": "Flow.Launcher.Plugin.AzureOpenAI.dll"
+} 
