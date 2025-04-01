@@ -1,4 +1,4 @@
-dotnet publish Flow.Launcher.Plugin.AzureOpenAI -c Debug -r win-x64 --no-self-contained
+dotnet publish ./ -c Debug -r win-x64 --no-self-contained
 
 $AppDataFolder = [Environment]::GetFolderPath("ApplicationData")
 $flowLauncherExe = "$env:LOCALAPPDATA\FlowLauncher\Flow.Launcher.exe"
@@ -12,14 +12,14 @@ if (Test-Path $flowLauncherExe) {
     }
 
     # Define the source and destination paths
-    $SourcePath = "Flow.Launcher.Plugin.AzureOpenAI\bin\Debug\net7.0-windows\win-x64\publish"
+    $SourcePath = "bin\Debug\net7.0-windows\win-x64\publish"
     $DestinationPath = "$AppDataFolder\FlowLauncher\Plugins\AzureOpenAI"
 
     # Copy the compiled plugin files to the destination folder
     Copy-Item $SourcePath $DestinationPath -Recurse -Force
 
     # Copy the Plugin.json file to the destination folder
-    Copy-Item "Flow.Launcher.Plugin.AzureOpenAI\Plugin.json" $DestinationPath -Force
+    Copy-Item "Plugin.json" $DestinationPath -Force
 
     # Rename the folder if necessary
     if (Test-Path "$AppDataFolder\FlowLauncher\Plugins\publish") {
