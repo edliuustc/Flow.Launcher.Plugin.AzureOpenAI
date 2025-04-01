@@ -47,7 +47,15 @@ namespace Flow.Launcher.Plugin.AzureOpenAI
                             _context.API.LogInfo("AzureOpenAI:", "trying to send the request");
                             var response = await GetAIResponse(query.Search.Trim());
 
-                            // Update the Flow Launcher UI with the response
+                            // Store the response in a variable
+                            var responseResult = new Result
+                            {
+                                Title = "Response",
+                                SubTitle = response,
+                                IcoPath = "Images/app.png"
+                            };
+
+                            // Update the Flow Launcher UI with the response in the result panel
                             _context.API.ChangeQuery(query.RawQuery, true);
                             _context.API.ChangeQuery(response, true);
                         });
@@ -127,7 +135,24 @@ namespace Flow.Launcher.Plugin.AzureOpenAI
 
         public List<Result> LoadContextMenus(Result selectedResult)
         {
-            return new List<Result>();
+            var results = new List<Result>();
+
+            // Retrieve the stored response from the context data
+            var response = _context.CurrentPluginMetadata.ActionKeyword;
+
+            _context.API.LogInfo("AzureOpenAI:", "response is {0}", response);
+
+            if (!string.IsNullOrEmpty(response))
+            {
+                results.Add(new Result
+                {
+                    Title = "Response",
+                    SubTitle = response,
+                    IcoPath = "Images/app.png"
+                });
+            }
+
+            return results;
         }
     }
 } 
